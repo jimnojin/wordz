@@ -12,8 +12,22 @@
 
   <v-app>
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
-    <v-navigation-drawer app></v-navigation-drawer>
-    <v-toolbar app></v-toolbar>
+    <v-navigation-drawer app fixed
+      v-model="drawer">
+      <v-toolbar flat>
+        <v-list>
+          <v-list-tile @click="$router.push({ name: 'list' })">
+            <v-list-tile-title class="title">
+              List words
+            </v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-toolbar>
+    </v-navigation-drawer>
+
+    <v-toolbar app>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+    </v-toolbar>
     <v-content>
       <v-container fluid>
         <router-view></router-view>
@@ -25,7 +39,9 @@
 
 <script>
 export default {
-  name: 'app'
+  data: () => ({
+    drawer: null
+  })
 }
 </script>
 
